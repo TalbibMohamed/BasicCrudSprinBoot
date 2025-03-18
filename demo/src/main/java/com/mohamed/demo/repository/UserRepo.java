@@ -41,6 +41,11 @@ public class UserRepo {
         String sql = "SELECT * FROM users";
         return jdbcTemplate.query(sql, rowMapper);
     }
+    public User findByEmailAndPassword(String email, String password) {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        User user = jdbcTemplate.queryForObject(sql, rowMapper, email, password);
+        return user;
+    }
 
 
 }

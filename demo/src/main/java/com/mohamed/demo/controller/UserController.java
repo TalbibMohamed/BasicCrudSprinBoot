@@ -1,7 +1,10 @@
 package com.mohamed.demo.controller;
 
 import com.mohamed.demo.Service.UserService;
+import com.mohamed.demo.model.LoginRequest;
 import com.mohamed.demo.model.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +32,14 @@ public class UserController {
         userService.addUser(user);
         return "User created successfully ! ";
     }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest login ) {
+        User user = userService.loginUser(login.getEmail(), login.getPassword());
+        if(user != null){
+            return ResponseEntity.ok("user Logged in");
+        }
+        return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
 
+    }
 
 }

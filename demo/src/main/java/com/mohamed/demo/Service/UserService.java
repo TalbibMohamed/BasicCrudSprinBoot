@@ -12,6 +12,7 @@ public interface UserService {
 
 
     public int addUser(User user) ;
+    public User loginUser(String email , String password);
 
 
 }
